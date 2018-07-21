@@ -32,13 +32,12 @@ class Matrix():
             print('')
    
     def add(self):
-        self.addlist=[]
-        for i in range(self.index2):
-            self.addlist.append(self.list[i]+self.list2[i])
-        self.addlist
-
         print('='*10+' A + B '+'='*10)
         if self.n1==self.n2 and self.m1==self.m2:
+            self.addlist=[]
+            for i in range(self.index2):
+                self.addlist.append(self.list[i]+self.list2[i])
+            self.addlist
             for ii in range(int(self.n1)):
                 for jj in range(int(self.m1)):
                     print(self.addlist[jj+ii*int(self.m1)],end=' ')
@@ -47,13 +46,12 @@ class Matrix():
             print("Matrixs' size should be in the same size")
 
     def plus(self):
-        self.pluslist=[]
-        for i in range(self.index2):
-            self.pluslist.append(self.list[i]-self.list2[i])
-        self.pluslist
-
         print('='*10+' A - B '+'='*10)
         if self.n1==self.n2 and self.m1==self.m2:
+            self.pluslist=[]
+            for i in range(self.index2):
+                self.pluslist.append(self.list[i]-self.list2[i])
+            self.pluslist
             for ii in range(int(self.n1)):
                 for jj in range(int(self.m1)):
                     print(self.pluslist[jj+ii*int(self.m1)],end=' ')
@@ -62,42 +60,48 @@ class Matrix():
             print("Matrixs' size should be in the same size")
 
     def cross(self):
-        a=0
-        self.crosslist=[]
-        n1=int(self.n1)
-        m1=int(self.m1)
-        n2=int(self.n2)
-        m2=int(self.m2)
-        for j in range(n1):
-            for k in range(m2):
-                for l in range(m1):
-                    self.element=self.list[l+j*m1]*self.list2[0+m2*l+k*1]
-                    a=a+int(self.element)
-                self.crosslist.append(a)
-                a=0
-
         print('='*10+' A * B '+'='*10)
-        for ii in range(int(self.n1)):
-            for jj in range(int(self.m2)):
-                print(self.crosslist[jj+ii*int(self.m2)],end=' ')
-            print('')
+        if self.m1==self.n2:
+            a=0
+            self.crosslist=[]
+            n1=int(self.n1)
+            m1=int(self.m1)
+            n2=int(self.n2)
+            m2=int(self.m2)
+            for j in range(n1):
+                for k in range(m2):
+                    for l in range(m1):
+                        self.element=self.list[l+j*m1]*self.list2[0+m2*l+k*1]
+                        a=a+int(self.element)
+                    self.crosslist.append(a)
+                    a=0
+            for ii in range(int(self.n1)):
+                for jj in range(int(self.m2)):
+                    print(self.crosslist[jj+ii*int(self.m2)],end=' ')
+                print('')
+        else:
+            print("The column of matrix A must be same as The row of matrix B")
 
     def transpose(self):
-        self.tralist=[]
-        n1=int(self.n1)
-        m2=int(self.m2)
-        for i in range(n1*m2):
-            self.tralist.append(0)
-       
-        for j in range(n1):
-            for k in range(m2):
-                self.tralist[j+k*n1]=self.crosslist[k+j*m2]
-
         print('='*5+' the transpose of A * B '+'='*5)
-        for ii in range(int(self.m2)):
-            for jj in range(int(self.n1)):
-                print(self.tralist[jj+ii*int(self.n1)],end=' ')
-            print('')
+        if self.m1==self.n2:
+            self.tralist=[]
+            n1=int(self.n1)
+            m2=int(self.m2)
+            for i in range(n1*m2):
+                self.tralist.append(0)
+       
+            for j in range(n1):
+                for k in range(m2):
+                    self.tralist[j+k*n1]=self.crosslist[k+j*m2]
+
+        
+            for ii in range(int(self.m2)):
+                for jj in range(int(self.n1)):
+                    print(self.tralist[jj+ii*int(self.n1)],end=' ')
+                print('')
+        else:
+            print("The column of matrix A must be same as The row of matrix B")
  
 a=Matrix()
 a.A(input("Enter A matrix's row:"),input("Enter A matrix's cols:"))
